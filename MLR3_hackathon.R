@@ -24,6 +24,16 @@ setwd("\\\\fp5hq/parentviewanalysis$/Data Science Graduate Programme/Year2/Modul
 ames <- read.csv("ames.csv") %>%
   clean_names()
 
+#multiple linear regression using tidyverse
+#Using tidyverse
+model <- lm(sale_price ~ lot_area + lot_config + neighborhood + bldg_type + overall_qual + overall_cond + year_built, data = ames)
+summary(model)$coefficient
+
+#Overall quality is the most significant factor with lot area as number 2
+#Rerun without Neighborhood and condition
+refined <- lm(sale_price ~ lot_area + lot_config + overall_qual + year_built, data = ames)
+summary(refined)
+
 #choose subset of variables - lot area, lot cofig, neighborhood, building type, overall quality, overall condition, year built & outcome of sale price
 ames2 <- ames %>%
   select(lot_area,lot_config,neighborhood,bldg_type,overall_qual,overall_cond,year_built,sale_price)%>%
